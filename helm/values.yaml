@@ -21,11 +21,10 @@ argocd:
 components:
 
   # --- Lightspeed Configuration ---
-  lightspeed-config:
+  lightspeedConfig:
     enabled: true
-    
+    namespace: openshift-lightspeed
 
-  
   # --- Operator Installation ---
   operator:
     # Set to true to install the operator via OLM
