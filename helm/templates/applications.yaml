@@ -86,7 +86,7 @@ spec:
       - CreateNamespace=true
 {{- end }}
 
-{{- if .Values.components.lightspeed-config.enabled }}
+{{- if .Values.components.lightspeedConfig.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -106,12 +106,12 @@ spec:
     helm:
       valuesObject:
         demo:
-          enabled: {{ .Values.components.lightspeed-config.enabled }}
-          namespace: {{ .Values.components.lightspeed-config.namespace }}
+          enabled: {{ .Values.components.lightspeedConfig.enabled }}
+          namespace: {{ .Values.components.lightspeedConfig.namespace }}
         deployer:
           domain: {{ .Values.deployer.domain | quote }}
         litemaas:
-          apiUrl: {{ .Values.litemaas.apiUrl}}
+          apiUrl: {{ .Values.litemaas.apiUrl }}
           apiKey: {{ .Values.litemaas.apiKey }}
           model: {{ .Values.litemaas.model }}
   destination:
