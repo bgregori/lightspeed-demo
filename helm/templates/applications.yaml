@@ -86,6 +86,45 @@ spec:
       - CreateNamespace=true
 {{- end }}
 
+{{- if .Values.components.lightspeed-config.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Release.Name }}-lightspeed-config
+  namespace: {{ .Values.argocd.namespace }}
+  labels:
+    demo.redhat.com/application: "field-content"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.argocd.project }}
+  source:
+    repoURL: {{ .Values.gitops.repoUrl }}
+    targetRevision: {{ .Values.gitops.revision }}
+    path: {{ .Values.gitops.basePath }}/components/lightspeed-config
+    helm:
+      valuesObject:
+        demo:
+          enabled: {{ .Values.components.lightspeed-config.enabled }}
+          namespace: {{ .Values.components.lightspeed-config.namespace }}
+        deployer:
+          domain: {{ .Values.deployer.domain | quote }}
+        litemaas:
+          apiUrl: {{ .Values.litemaas.apiUrl}}
+          apiKey: {{ .Values.litemaas.apiKey }}
+          model: {{ .Values.litemaas.model }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Values.components.lightspeed-config.namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}
+
 {{- if .Values.components.showroom.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
