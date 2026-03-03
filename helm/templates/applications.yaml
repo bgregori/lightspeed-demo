@@ -116,7 +116,7 @@ spec:
           model: {{ .Values.litemaas.model }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ .Values.components.lightspeed-config.namespace }}
+    namespace: {{ .Values.components.lightspeedConfig.namespace }}
   syncPolicy:
     automated:
       prune: true
