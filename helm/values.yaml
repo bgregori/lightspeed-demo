@@ -20,11 +20,17 @@ argocd:
 # ============================================================
 components:
 
+  # --- Lightspeed Configuration ---
+  lightspeed-config:
+    enabled: true
+    
+
+  
   # --- Operator Installation ---
   operator:
     # Set to true to install the operator via OLM
     # Set to false if operator is already installed on cluster
-    enabled: false
+    enabled: true
     name: web-terminal
     namespace: openshift-operators
     channel: fast
@@ -78,6 +84,11 @@ components:
 deployer:
   domain: ""
   apiUrl: ""
+
+litemaas:
+  apiUrl: ""
+  apiKey: ""
+  model: ""
 
 fieldContent:
   deploymentType: "helm"
